@@ -4,9 +4,8 @@
 #
 # Usage: ./install.sh
 #
-# Use this rather than `omarchy theme install <url>`: that would name the theme
-# after the repo ("directory") and drop hyprland.lua, and it never installs the
-# bar widgets.
+# Use this rather than `omarchy theme install <url>`: that drops hyprland.lua
+# and never installs the bar widgets, hook or keybindings.
 
 set -euo pipefail
 

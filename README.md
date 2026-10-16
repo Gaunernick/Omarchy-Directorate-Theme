@@ -44,14 +44,15 @@ screensaver text. The bar widgets stay installed but unused.
 ## Install
 
 ```bash
-git clone https://github.com/Gaunernick/Omarchy-Directory-Theme.git
-cd Omarchy-Directory-Theme
+git clone https://github.com/Gaunernick/Omarchy-Directorate-Theme.git
+cd Omarchy-Directorate-Theme
 ./install.sh
 ```
 
-Don't use `omarchy theme install <url>` for this repo. That would name the theme
-after the repo ("directory"), strip `hyprland.lua`, and skip the bar widgets,
-hook and keybindings.
+`omarchy theme install https://github.com/Gaunernick/Omarchy-Directorate-Theme.git`
+also works, but only gives you the colours, wallpapers and shell styling: Omarchy
+strips `hyprland.lua` from cloned themes and never installs the bar widgets,
+hook or keybindings. Use `./install.sh` for the full theme.
 
 The installer:
 
