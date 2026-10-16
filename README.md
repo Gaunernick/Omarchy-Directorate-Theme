@@ -19,7 +19,7 @@ The typeface is IBM Plex Mono.
 
 ## Your station
 
-![The SUPERVISION floor](backgrounds/6-supervision.png)
+![STN-0117 blinking at its desk, with the link to the mainframe pulsing](docs/station.gif)
 
 The sixth wallpaper, **SUPERVISION**, is Floor 41 seen from above. Rows of
 three-armed desks sit in blocks inside a brutalist footprint, wired like a

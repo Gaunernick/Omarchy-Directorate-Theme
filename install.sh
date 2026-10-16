@@ -38,7 +38,7 @@ fi
 mkdir -p "$THEME_DIR"
 rsync -a --delete \
   --exclude .git --exclude plugins --exclude bar-modules \
-  --exclude install.sh --exclude uninstall.sh --exclude README.md --exclude LICENSE \
+  --exclude install.sh --exclude uninstall.sh --exclude README.md --exclude LICENSE --exclude docs \
   "$SRC/" "$THEME_DIR/"
 
 # Bar widgets and popups.
