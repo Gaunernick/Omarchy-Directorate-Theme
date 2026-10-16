@@ -15,6 +15,19 @@ if [[ $(omarchy theme current 2>/dev/null | tr '[:upper:]' '[:lower:]') == "dire
   omarchy theme set "$NEXT"
 fi
 
+# The lock screen clone, if install.sh --lock made it. Removing it restores
+# Omarchy's stock lock screen.
+LOCK_ID="${USER:-$(id -un)}.lock"
+if grep -qsF "DIRECTORATE" "$CONFIG/plugins/$LOCK_ID/LockView.qml"; then
+  omarchy plugin remove "$LOCK_ID" --yes
+fi
+
+SHELL_JSON="$CONFIG/shell.json"
+if [[ -f $SHELL_JSON ]]; then
+  tmp=$(mktemp)
+  jq 'if .plugins then .plugins |= map(select(.id != "directorate.beacon")) else . end' "$SHELL_JSON" >"$tmp" && mv "$tmp" "$SHELL_JSON"
+fi
+
 rm -rf "$CONFIG"/plugins/directorate.*
 rm -f "$CONFIG"/bar/modules/directorate-*.qml
 rm -f "$CONFIG/hooks/theme-set.d/directorate.sh"

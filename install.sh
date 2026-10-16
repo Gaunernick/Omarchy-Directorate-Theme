@@ -2,12 +2,23 @@
 # DIRECTORATE: install the theme and the shell pieces a theme cannot carry
 # itself (bar widgets, theme-set hook, keybindings, terminal greeting).
 #
-# Usage: ./install.sh
+# Usage: ./install.sh [--lock]
+#
+#   --lock  also style the lock screen (clones Omarchy's lock plugin and
+#           patches its view; see README)
 #
 # Use this rather than `omarchy theme install <url>`: that drops hyprland.lua
 # and never installs the bar widgets, hook or keybindings.
 
 set -euo pipefail
+
+LOCK=0
+for arg in "$@"; do
+  case $arg in
+  --lock) LOCK=1 ;;
+  *) echo "Usage: ./install.sh [--lock]" >&2; exit 1 ;;
+  esac
+done
 
 SRC=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 CONFIG="$HOME/.config/omarchy"
@@ -38,6 +49,15 @@ for plugin in "$SRC"/plugins/directorate.*; do
 done
 cp "$SRC"/bar-modules/*.qml "$CONFIG/bar/modules/"
 
+# STN-0117 beacon: a service plugin, so it is switched on in shell.json rather
+# than placed in the bar.
+SHELL_JSON="$CONFIG/shell.json"
+if [[ -f $SHELL_JSON ]] && ! jq -e '(.plugins // []) | any(.id == "directorate.beacon")' "$SHELL_JSON" >/dev/null; then
+  cp "$SHELL_JSON" "$SHELL_JSON.bak.$(date +%s)"
+  tmp=$(mktemp)
+  jq '.plugins = ((.plugins // []) + [{"id": "directorate.beacon"}])' "$SHELL_JSON" >"$tmp" && mv "$tmp" "$SHELL_JSON"
+fi
+
 # Theme-set hook: swaps the bar layout, menu, font and screensaver in while the
 # theme is selected and restores yours afterwards.
 mkdir -p "$CONFIG/hooks/theme-set.d"
@@ -45,7 +65,7 @@ install -m 0755 "$THEME_DIR/extras/theme-set-hook.sh" "$CONFIG/hooks/theme-set.d
 
 # Keybindings: the stock popup keys look for the stock widget ids. Toggle both
 # so the keys keep working under every theme.
-if [[ -f $BINDINGS ]] && ! grep -qF "$MARKER" "$BINDINGS"; then
+if [[ -f $BINDINGS ]] && ! grep -qF -- "$MARKER" "$BINDINGS"; then
   cp "$BINDINGS" "$BINDINGS.bak.$(date +%s)"
   cat >>"$BINDINGS" <<'EOF'
 
@@ -69,6 +89,31 @@ fi
 LINE='[[ -r ~/.config/omarchy/themes/directorate/extras/terminal.sh ]] && source ~/.config/omarchy/themes/directorate/extras/terminal.sh'
 if [[ -f $BASHRC ]] && ! grep -qF "$LINE" "$BASHRC"; then
   printf '\n%s\n' "$LINE" >>"$BASHRC"
+fi
+
+# Lock screen (opt-in): clone the stock lock plugin and patch only its view.
+# Authentication stays the stock code. If Omarchy has changed its lock screen
+# since this patch was made, the clone is removed and the stock lock stays.
+if ((LOCK)); then
+  LOCK_ID="${USER:-$(id -un)}.lock"
+  LOCK_DIR="$CONFIG/plugins/$LOCK_ID"
+  if [[ -d $LOCK_DIR ]]; then
+    if grep -qF "DIRECTORATE" "$LOCK_DIR/LockView.qml"; then
+      cp "$SRC/plugins/directorate.beacon/StationPulse.qml" "$LOCK_DIR/"
+    else
+      echo "Skipping the lock screen: you already have your own lock clone at $LOCK_DIR" >&2
+    fi
+  elif ! command -v patch >/dev/null; then
+    echo "Skipping the lock screen: 'patch' is not installed" >&2
+  else
+    omarchy plugin clone omarchy.lock
+    if patch -d "$LOCK_DIR" -p1 --forward --quiet <"$SRC/extras/lock/LockView.patch"; then
+      cp "$SRC/plugins/directorate.beacon/StationPulse.qml" "$LOCK_DIR/"
+    else
+      echo "The lock screen patch no longer applies; keeping Omarchy's stock lock screen" >&2
+      omarchy plugin remove "$LOCK_ID" --yes
+    fi
+  fi
 fi
 
 omarchy theme set directorate

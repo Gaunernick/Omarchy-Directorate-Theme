@@ -1,0 +1,74 @@
+--- a/LockView.qml	2026-10-16 17:17:56.307620266 +0200
++++ b/LockView.qml	2026-10-16 17:17:56.309360459 +0200
+@@ -1,5 +1,7 @@
+ import QtQuick
+ import QtQuick.Effects
++import Quickshell
++import Quickshell.Io
+ import qs.Commons
+ import qs.Ui
+ 
+@@ -17,6 +19,29 @@
+   property string passwordText: ""
+   property bool syncingPasswordText: false
+ 
++  // DIRECTORATE: while the theme is active the lock shows the SUPERVISION
++  // sheet, unblurred, with STN-0117 blinking red: you are away from your seat.
++  readonly property string directorateDir: Quickshell.env("HOME") + "/.config/omarchy/themes/directorate"
++  readonly property bool directorate: loadBackground && themeNameView.text().trim() === "directorate" && !!directorateSeat
++  property var directorateSeat: null
++
++  FileView {
++    id: themeNameView
++    path: Quickshell.env("HOME") + "/.local/state/omarchy/current/theme.name"
++    watchChanges: true
++    onFileChanged: reload()
++  }
++
++  FileView {
++    path: root.directorateDir + "/extras/build/6-supervision.seat.json"
++    watchChanges: true
++    onFileChanged: reload()
++    onLoaded: {
++      try { root.directorateSeat = JSON.parse(text()) } catch (e) { root.directorateSeat = null }
++    }
++    onLoadFailed: root.directorateSeat = null
++  }
++
+   readonly property string placeholderText: "Enter Password"
+   readonly property int fieldWidth: 381
+   readonly property int fieldHeight: 67
+@@ -93,7 +118,8 @@
+     Image {
+       id: wallpaper
+       anchors.fill: parent
+-      source: root.loadBackground ? root.fileUrl(root.backgroundPath) : ""
++      source: !root.loadBackground ? ""
++        : root.fileUrl(root.directorate ? root.directorateDir + "/backgrounds/6-supervision.png" : root.backgroundPath)
+       fillMode: Image.PreserveAspectCrop
+       asynchronous: true
+       cache: false
+@@ -105,13 +131,22 @@
+       anchors.fill: wallpaper
+       source: wallpaper
+       autoPaddingEnabled: false
+-      blurEnabled: root.loadBackground && wallpaper.status === Image.Ready
++      blurEnabled: root.loadBackground && !root.directorate && wallpaper.status === Image.Ready
+       blur: 1.0
+       blurMax: 128
+       blurMultiplier: 1.25
+       contrast: -0.08
+     }
+ 
++    StationPulse {
++      anchors.fill: parent
++      visible: root.directorate
++      seat: root.directorateSeat
++      seatColor: root.directorateSeat ? root.directorateSeat.away : "#d24646"
++      linkColor: root.directorateSeat ? root.directorateSeat.link : "#37a8c2"
++      linkActive: false
++    }
++
+     MouseArea {
+       anchors.fill: parent
+       hoverEnabled: true

@@ -10,9 +10,9 @@ local inactive_border_color = "rgb(2a2e30)"
 
 hl.config({
   general = {
-    -- 8px corridors between stations (4 + 4), 24px perimeter wall.
+    -- 8px corridors between stations (4 + 4), 8px perimeter wall.
     gaps_in = 4,
-    gaps_out = 24,
+    gaps_out = 8,
     border_size = 2,
 
     col = {

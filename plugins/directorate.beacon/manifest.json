@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "directorate.beacon",
+  "name": "Directorate Beacon",
+  "version": "1.0.0",
+  "author": "gaunernick",
+  "description": "Blinks your station (STN-0117) on the SUPERVISION wallpaper",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "Beacon.qml"
+  }
+}

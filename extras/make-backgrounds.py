@@ -126,14 +126,14 @@ def frame(code, title):
     return "".join(out)
 
 
-def base(body, code, title, scan=True):
+def base(body, code, title, scan=True, framed=True):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
         defs(),
         rect(0, 0, W, H, fill="url(#void)"),
         rect(0, 0, W, H, fill="url(#dots)"),
         body,
-        frame(code, title),
+        frame(code, title) if framed else "",
     ]
     if scan:
         parts.append(rect(0, 0, W, H, fill="url(#scan)"))
@@ -358,6 +358,17 @@ SHEETS = {
     "4-void": void,
     "5-notice": institution,
 }
+
+
+def _supervision():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("sheet_supervision", HERE / "sheet_supervision.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.supervision()
+
+
+SHEETS["6-supervision"] = _supervision
 
 
 def main():

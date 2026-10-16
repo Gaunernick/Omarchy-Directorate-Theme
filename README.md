@@ -21,7 +21,13 @@ The typeface is IBM Plex Mono.
 
 - **Colours** for terminals, Hyprland borders and every shell surface (bar,
   launcher, menu, notifications, lock screen, polkit prompt, popups).
-- **Five generated wallpapers**: monolith, floorplan, telemetry, void, notice.
+- **Six generated wallpapers**: monolith, floorplan, telemetry, void, notice,
+  supervision.
+- **Supervision**: an open-plan floor wired to a central mainframe. Your seat,
+  STN-0117, blinks institutional blue while that wallpaper is up, and your link
+  to the mainframe pulses with traffic.
+- **Screensaver**: shows the supervision floor with your seat blinking red,
+  because you are away from it. Any key or mouse movement still dismisses it.
 - **Status bar.** The left side shows a station designation and workspaces as
   numbered sector cells. The right side is telemetry as text codes:
   `CPU ▮▮▮ MEM ▮▮▮ BT LAN VOL 72 DSP`. Trouble shows in alarm red
@@ -36,7 +42,10 @@ The typeface is IBM Plex Mono.
 - **Super+Space menu** becomes a numbered directory (01 Applications …
   10 End of Shift). The old names still work as search terms.
 - **Terminal**: a session banner and a Starship prompt in the institution's voice.
+- **Lock screen**: the supervision floor, unblurred, with your seat blinking
+  red (optional, see below).
 - **Boot unlock screen**: "DIRECTORATE / IDENTIFY YOURSELF" (optional, see below).
+- **Windows** tile 8px from the screen edge.
 
 Selecting another theme restores your previous bar layout, menu, font and
 screensaver text. The bar widgets stay installed but unused.
@@ -59,12 +68,28 @@ The installer:
 1. installs `ttf-ibmplex-mono-nerd` if it is missing
 2. copies the theme to `~/.config/omarchy/themes/directorate`
 3. copies the bar widgets to `~/.config/omarchy/plugins/directorate.*` and
-   `~/.config/omarchy/bar/modules/`
+   `~/.config/omarchy/bar/modules/`, and switches on the `directorate.beacon`
+   plugin (seat and link animation) in `~/.config/omarchy/shell.json`
+   (backed up first)
 4. installs the theme-set hook to `~/.config/omarchy/hooks/theme-set.d/`
 5. appends a keybinding block to `~/.config/hypr/bindings.lua` (backed up
    first) so Super+Ctrl+A/B/D/W and Super+Ctrl+Alt+D open the themed popups
 6. adds one line to `~/.bashrc` for the terminal banner and prompt
 7. selects the theme
+
+### Lock screen (optional)
+
+```bash
+./install.sh --lock
+```
+
+This clones Omarchy's lock plugin (`omarchy plugin clone omarchy.lock`, which
+makes `<username>.lock`) and patches only its view to show the supervision
+floor. Password and fingerprint handling stay Omarchy's own code. The clone no
+longer follows Omarchy updates to the lock screen, so after a big Omarchy update
+remove it with `omarchy plugin remove <username>.lock` and run
+`./install.sh --lock` again. If the patch no longer applies, the installer keeps
+the stock lock screen.
 
 ### Boot unlock screen (optional)
 
@@ -90,7 +115,14 @@ omarchy plymouth set by theme directorate
   copy in `~/.config/omarchy/plugins/`, run `omarchy restart shell`; live
   reload does not pick up changes to the popup files.
 - The wallpapers and unlock image are generated from the SVGs in
-  `extras/build/` by `extras/make-backgrounds.py`.
+  `extras/build/` by `extras/make-backgrounds.py`. The supervision floor comes
+  from `extras/sheet_supervision.py`, with the desk geometry in
+  `extras/honeycomb_desks.py`. The knobs at its top (`A`, `ROWS`, `COL_PITCH`,
+  `COL_CELLS`) set desk size and density. Rendering also writes
+  `extras/build/6-supervision.seat.json`, which the beacon and lock screen read
+  to find your seat and route.
+- The beacon and the lock screen are service plugins, so the shell does not
+  live-reload them: run `omarchy restart shell` after editing them.
 - The menu names live in `extras/omarchy-menu.jsonc`.
 
 ## Requirements
