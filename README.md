@@ -17,17 +17,40 @@ Ninety percent of the screen is void. Every bright colour has exactly one meanin
 The background is phosphor black (`#0b140f`): dark CRT glass with a green cast.
 The typeface is IBM Plex Mono.
 
+## Your station
+
+![The SUPERVISION floor](backgrounds/6-supervision.png)
+
+The sixth wallpaper, **SUPERVISION**, is Floor 41 seen from above. Rows of
+three-armed desks sit in blocks inside a brutalist footprint, wired like a
+motherboard to a mainframe in the middle. The supervisors' desks around the
+mainframe are drawn in institutional blue. One chair in the top right is yours:
+**STN-0117**.
+
+The floor is live, and it changes with whether you are at your desk:
+
+| State | Your seat | Your link to the mainframe |
+|---|---|---|
+| **At your desk** (SUPERVISION as wallpaper) | blinks slowly in institutional blue | pulses like an active line, with a data packet travelling from the mainframe to your seat |
+| **Away** (screensaver) | blinks red | at rest |
+| **Locked** (lock screen) | blinks red, on the floor plan without blur | at rest |
+
+The screensaver and lock screen show the floor whichever DIRECTORATE wallpaper
+you have chosen. The screensaver keeps working as usual: any key or mouse
+movement dismisses it.
+
+The wallpaper itself is an ordinary image. The animation comes from the theme's
+shell pieces: the `directorate.beacon` plugin for the desktop and screensaver,
+and a patched copy of Omarchy's lock screen for the lock. Without them the floor
+is still (see [Install](#install)).
+
 ## What it changes
 
 - **Colours** for terminals, Hyprland borders and every shell surface (bar,
   launcher, menu, notifications, lock screen, polkit prompt, popups).
 - **Six generated wallpapers**: monolith, floorplan, telemetry, void, notice,
-  supervision.
-- **Supervision**: an open-plan floor wired to a central mainframe. Your seat,
-  STN-0117, blinks institutional blue while that wallpaper is up, and your link
-  to the mainframe pulses with traffic.
-- **Screensaver**: shows the supervision floor with your seat blinking red,
-  because you are away from it. Any key or mouse movement still dismisses it.
+  and the live SUPERVISION floor described above.
+- **Screensaver**: the supervision floor with your seat blinking red.
 - **Status bar.** The left side shows a station designation and workspaces as
   numbered sector cells. The right side is telemetry as text codes:
   `CPU ▮▮▮ MEM ▮▮▮ BT LAN VOL 72 DSP`. Trouble shows in alarm red
@@ -52,16 +75,38 @@ screensaver text. The bar widgets stay installed but unused.
 
 ## Install
 
+**Recommended: install with the shell pieces.** Most of what makes DIRECTORATE
+feel like a workplace is not in the theme's colours. It is in the shell: the bar,
+the popups, the menu, the terminal voice and the live seat. A standard Omarchy
+theme cannot carry those, so use the installer:
+
 ```bash
 git clone https://github.com/Gaunernick/Omarchy-Directorate-Theme.git
 cd Omarchy-Directorate-Theme
-./install.sh
+./install.sh --lock     # or ./install.sh to keep Omarchy's stock lock screen
 ```
 
-`omarchy theme install https://github.com/Gaunernick/Omarchy-Directorate-Theme.git`
-also works, but only gives you the colours, wallpapers and shell styling: Omarchy
-strips `hyprland.lua` from cloned themes and never installs the bar widgets,
-hook or keybindings. Use `./install.sh` for the full theme.
+The standard way also works, but you only get part of the theme:
+
+```bash
+omarchy theme install https://github.com/Gaunernick/Omarchy-Directorate-Theme.git
+```
+
+| | `omarchy theme install` | `./install.sh` | `./install.sh --lock` |
+|---|:---:|:---:|:---:|
+| Colours, wallpapers, shell styling | ✓ | ✓ | ✓ |
+| Window layout and motion (`hyprland.lua`) | – | ✓ | ✓ |
+| Bar: designation, sectors, telemetry | – | ✓ | ✓ |
+| Themed popups, roster and weather bulletin | – | ✓ | ✓ |
+| Numbered Super+Space directory | – | ✓ | ✓ |
+| Terminal banner and prompt | – | ✓ | ✓ |
+| Live seat and pulsing link on the wallpaper | – | ✓ | ✓ |
+| Red seat on the screensaver | – | ✓ | ✓ |
+| Red seat on the lock screen | – | – | ✓ |
+
+With the standard install, Omarchy removes `hyprland.lua` from cloned themes and
+never installs plugins, hooks or keybindings. You get a still SUPERVISION
+wallpaper and the stock bar, menu, screensaver and lock screen.
 
 The installer:
 
@@ -75,7 +120,8 @@ The installer:
 5. appends a keybinding block to `~/.config/hypr/bindings.lua` (backed up
    first) so Super+Ctrl+A/B/D/W and Super+Ctrl+Alt+D open the themed popups
 6. adds one line to `~/.bashrc` for the terminal banner and prompt
-7. selects the theme
+7. with `--lock`, styles the lock screen (see below)
+8. selects the theme and restarts the shell
 
 ### Lock screen (optional)
 
