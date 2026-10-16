@@ -1,0 +1,10 @@
+[notifications]
+# Every notification is an internal memo: flat black slip, hairline frame,
+# and a heavy cyan filing stripe down the left edge.
+background       = "#0b0b0a"
+background-alpha = 1.0
+text             = "#cfdfe2"
+border           = "#37a8c2"
+border-alpha     = 1.0
+border-width     = "1 1 1 6"
+countdown        = "#37a8c2"

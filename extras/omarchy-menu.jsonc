@@ -1,0 +1,23 @@
+{
+  // DIRECTORATE: the Omarchy menu as a filing directory. Swapped into
+  // ~/.config/omarchy/extensions/omarchy-menu.jsonc by the theme-set hook while
+  // DIRECTORATE is selected; the previous file is restored afterwards.
+  //
+  // Only the top level is renamed. Each entry keeps its old name as a search
+  // alias, so typing "install" or "style" still finds it. Submenus keep their
+  // glyphs: there they help you pick out an item at a glance.
+
+  // The prompt is the open menu's title, so the root reads "Directory…".
+  "root": {"label":"Directory"},
+
+  "apps":    {"icon":"01","label":"Applications","aliases":["app","apps","applications"]},
+  "learn":   {"icon":"02","label":"Manuals","aliases":["learn","manual","docs"]},
+  "trigger": {"icon":"03","label":"Procedures","aliases":["trigger","procedure"]},
+  "style":   {"icon":"04","label":"Appearance","aliases":["style","appearance"]},
+  "setup":   {"icon":"05","label":"Configuration","aliases":["setup","settings","config"]},
+  "install": {"icon":"06","label":"Requisition","aliases":["install","requisition"]},
+  "remove":  {"icon":"07","label":"Decommission","aliases":["remove","uninstall","decommission"]},
+  "update":  {"icon":"08","label":"Revision","aliases":["update","restart","refresh","revision"]},
+  "about":   {"icon":"09","label":"Station Record","aliases":["about","station"]},
+  "system":  {"icon":"10","label":"End of Shift","aliases":["system","power-menu","shift"]}
+}

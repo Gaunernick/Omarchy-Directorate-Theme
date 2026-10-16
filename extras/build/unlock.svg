@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="280" viewBox="0 0 540 280">
+  <rect x="234" y="40" width="72" height="72" fill="none" stroke="#b0cbd0" stroke-width="3"/>
+  <rect x="248" y="70" width="22" height="13" fill="#b0cbd0"/>
+  <rect x="273" y="70" width="13" height="13" fill="#37a8c2"/>
+  <rect x="248" y="92" width="9" height="4" fill="#b0cbd0" opacity="0.5"/>
+  <text x="270" y="172" font-family="BlexMono Nerd Font" font-size="30" font-weight="bold" fill="#e7ecec" text-anchor="middle" letter-spacing="16">DIRECTORATE</text>
+  <text x="270" y="204" font-family="BlexMono Nerd Font" font-size="11" fill="#5c6360" text-anchor="middle" letter-spacing="6">IDENTIFY YOURSELF</text>
+</svg>

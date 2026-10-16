@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "directorate.network",
+  "name": "Directorate Uplink",
+  "version": "1.0.0",
+  "author": "gaunernick",
+  "description": "Wi-Fi list and connection state",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Directorate Uplink",
+    "description": "Wi-Fi list and connection state",
+    "category": "Network",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.network"
+  }
+}

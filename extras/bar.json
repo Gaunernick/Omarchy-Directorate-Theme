@@ -1,0 +1,66 @@
+{
+  "position": "top",
+  "transparent": false,
+  "centerAnchor": "directorate.clock",
+  "layout": {
+    "left": [
+      {
+        "id": "omarchy.menu"
+      },
+      {
+        "id": "directorate-designation",
+        "type": "qml"
+      },
+      {
+        "id": "directorate.sectors"
+      }
+    ],
+    "center": [
+      {
+        "id": "omarchy.indicators"
+      },
+      {
+        "id": "directorate.clock",
+        "format": "yyyy.MM.dd  HH:mm",
+        "formatAlt": "dddd  'W'ww",
+        "verticalFormat": "HH\n—\nmm"
+      },
+      {
+        "id": "omarchy.keyboard-layout"
+      },
+      {
+        "id": "directorate.weather"
+      },
+      {
+        "id": "omarchy.system-update"
+      }
+    ],
+    "right": [
+      {
+        "id": "directorate-telemetry",
+        "type": "qml"
+      },
+      {
+        "id": "omarchy.tray"
+      },
+      {
+        "id": "omarchy.agents"
+      },
+      {
+        "id": "directorate.bluetooth"
+      },
+      {
+        "id": "directorate.network"
+      },
+      {
+        "id": "directorate.audio"
+      },
+      {
+        "id": "directorate.monitor"
+      },
+      {
+        "id": "omarchy.power"
+      }
+    ]
+  }
+}

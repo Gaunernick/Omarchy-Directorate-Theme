@@ -1,0 +1,29 @@
+[controls]
+# Hairline instrument chrome. Hover and focus light up in data cyan,
+# a chosen item is a solid cyan block.
+normal-color        = "#b0cbd0"
+normal-fill-alpha   = 0.0
+normal-border       = "#b0cbd0"
+normal-border-width = 1
+normal-border-alpha = 0.22
+
+hover-cursor-color        = "#37a8c2"
+hover-cursor-fill-alpha   = 0.10
+hover-cursor-border       = "#37a8c2"
+hover-cursor-border-width = 1
+hover-cursor-border-alpha = 0.8
+
+focus-color        = "#37a8c2"
+focus-fill-alpha   = 0.10
+focus-border       = "#37a8c2"
+focus-border-width = 1
+focus-border-alpha = 0.8
+
+selected-color        = "#37a8c2"
+selected-fill-alpha   = 0.22
+selected-border       = "#37a8c2"
+selected-border-width = 1
+selected-border-alpha = 1.0
+
+pressed-fill-alpha   = 0.35
+selection-fill-alpha = 0.40

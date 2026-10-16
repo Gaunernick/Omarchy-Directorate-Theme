@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "directorate.clock",
+  "name": "Directorate Roster",
+  "version": "1.0.0",
+  "author": "gaunernick",
+  "description": "Date/time label with a calendar popup",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Directorate Roster",
+    "description": "Date/time label with a calendar popup",
+    "category": "Time",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.clock"
+  }
+}

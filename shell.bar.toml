@@ -1,0 +1,9 @@
+[bar]
+# A black ministry header band.
+background       = "#070707"
+background-alpha = 1.0
+text             = "#b0cbd0"
+active           = "#d24646"
+scale-with-font  = true
+size-horizontal  = 26
+size-vertical    = 28

@@ -1,0 +1,12 @@
+[polkit]
+# Authorization is a red-alert event: clearance required.
+background       = "#0b0b0a"
+background-alpha = 1.0
+text             = "#e7ecec"
+text-error       = "#ee6a5f"
+border           = "#d24646"
+border-error     = "#ee6a5f"
+border-alpha     = 1.0
+scrim            = "#000000"
+scrim-alpha      = 0.85
+accent           = "#d24646"

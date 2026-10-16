@@ -1,0 +1,14 @@
+[launcher]
+# Opaque card; the rest of the floor goes dark behind it.
+background                = "#0b0b0a"
+background-alpha          = 1.0
+text                      = "#b0cbd0"
+border                    = "#37a8c2"
+border-alpha              = 1.0
+scrim                     = "#000000"
+scrim-alpha               = 0.72
+selected-background       = "#37a8c2"
+selected-background-alpha = 0.16
+selected-text             = "#6fd0e3"
+selected-border           = "#37a8c2"
+selected-border-alpha     = 0.9

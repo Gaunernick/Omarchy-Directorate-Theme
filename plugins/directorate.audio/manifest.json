@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "directorate.audio",
+  "name": "Directorate Audio",
+  "version": "1.0.0",
+  "author": "gaunernick",
+  "description": "Volume slider, output picker, per-app mixer",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Directorate Audio",
+    "description": "Volume slider, output picker, per-app mixer",
+    "category": "Audio",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.audio"
+  }
+}

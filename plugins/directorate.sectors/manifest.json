@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "directorate.sectors",
+  "name": "Directorate Sectors",
+  "version": "1.0.0",
+  "author": "gaunernick",
+  "description": "Workspaces as numbered sector cells (DIRECTORATE theme)",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Sectors.qml"
+  },
+  "barWidget": {
+    "displayName": "Directorate Sectors",
+    "description": "Workspaces as numbered sector cells",
+    "category": "Compositor",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.workspaces"
+  }
+}

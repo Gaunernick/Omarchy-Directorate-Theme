@@ -1,0 +1,6 @@
+[tooltip]
+background       = "#e7ecec"
+background-alpha = 1.0
+text             = "#111110"
+border           = "#e7ecec"
+border-alpha     = 1.0

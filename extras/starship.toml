@@ -1,0 +1,36 @@
+# DIRECTORATE prompt: the terminal speaks in the institution's voice.
+# Your station number comes first, the work second. A failed command is a
+# recorded deviation, not an error.
+add_newline = true
+command_timeout = 200
+format = "[STN-0117](#5c6360) [·](#2a2e30) $directory$git_branch$git_status$character"
+
+[character]
+success_symbol = "[▸](bold #37a8c2)"
+error_symbol = "[DEVIATION ▸](bold #d24646)"
+
+[directory]
+truncation_length = 2
+truncation_symbol = "…/"
+style = "#b0cbd0"
+repo_root_style = "bold #e7ecec"
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+format = "[$branch]($style) "
+style = "#37a8c2"
+
+[git_status]
+format     = '[$all_status]($style)'
+style      = "#5c6360"
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked  = "? "
+modified   = " "
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""
