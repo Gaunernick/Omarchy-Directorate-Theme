@@ -10,7 +10,7 @@
   // The prompt is the open menu's title, so the root reads "Directory…".
   "root": {"label":"Directory"},
 
-  "apps":    {"icon":"01","label":"Applications","aliases":["app","apps","applications"]},
+  "apps":    {"icon":"01","label":"Applications","aliases":["app","apps","applications"],"provider":"apps"},
   "learn":   {"icon":"02","label":"Manuals","aliases":["learn","manual","docs"]},
   "trigger": {"icon":"03","label":"Procedures","aliases":["trigger","procedure"]},
   "style":   {"icon":"04","label":"Appearance","aliases":["style","appearance"]},
